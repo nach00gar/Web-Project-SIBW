@@ -1,0 +1,129 @@
+{% extends "main.twig" %}
+
+{# Plantilla hija que hereda de main. Define el contenido de las páginas de cada científico. #}
+
+    {% block maincontent %}
+    <div class="scientist">
+
+        <div class="article">
+            <article>
+                <h2>{{ scientist['name'] }}</h2>
+                <h4>{{ scientist['fechasnm'] }}</h4>
+                {% for etiqueta in hashtags %}
+                    <a id="ht">{{etiqueta['hashtag']}}</a>
+                {% endfor %}
+                {{ scientist['content'] }}
+            </article>
+        </div>
+
+        <div class="foto"><a href="cientifico.php?id={{ scientist['idScientist']}}"><img src="{{ scientist['fotoPortada']}}" class="width"></a></div>
+
+    </div>
+
+    {% endblock %}
+
+    {% block gallery %}
+    <div class="gallery">
+        <h2>Galería de fotos:</h2>
+        <div class="wrapper">
+            {% for imagen in fotos %}
+                <div class="item"><img src="{{ imagen }}"></div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block comentarios %}
+    <div id="sidebar1" class="sidebar">
+        <a href="javascript:void(0)" class="cerrar_comentarios" onclick="closeSidebar()"> X</a>
+        <div id="comentarios_title">
+            COMENTARIOS
+        </div>
+
+        <section class="comments-section">
+            {% if comentarios %}
+                {% for c in comentarios %}
+                    <div class="comentario">
+                        <h4>
+                            {{ c['user'] }}:
+                        </h4>
+                        {% if usuario['tipo'] == "MODERADOR" or usuario['tipo'] == "SUPER" %}
+                            <a class="btn_comentario" href="eliminarcomentario.php?id={{ c['idComentario'] }}">&times;</a>
+                            <a href="javascript:void(0)" class="btn_comentario" onclick="openEditar({{ c['idComentario'] }})">Editar</a>
+                        {% endif %}
+                        <p class="texto">
+                            {{ c['content'] }}
+                        </p>
+                        {% if usuario['tipo'] == "MOD" or usuario['tipo'] == "SUPER" %}
+                            <form class="editar_comentario" id="editar_comentario{{ c['idComentario'] }}" action="editarcomentario.php?id={{ c['idComentario'] }}" method="POST">
+                                <label for="msg">Edición</label>
+                                <textarea id="msg_edit" name="msg_edit" placeholder="Edita el comentario..." required>{{ c['content'] }}</textarea>
+                                <input type="submit" value="EDITAR"></input>
+                            </form>
+                        {% endif %}
+                        {% if c['editado'] %}
+                            <p class="comentario_editado">
+                            Editado por moderador.
+                            </p>
+                        {% endif %}
+
+                        <p class="fecha">
+                            {{ c['fecha'] }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="comentario">
+                    <h4>
+                    Nadie ha comentado nada:
+                    </h4>
+                    <p class="texto">
+                    ¡Sé el primero!
+                    </p>   
+                </div>
+            {% endif %}
+
+        </section>    
+
+        <form class="formulario" id="fc1" name="fc1" action="/addcomment.php?" onsubmit="return addComment(event);">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+
+                <input type='hidden' name='id' value="{{ scientist['idScientist'] }}" />
+
+                <label for="mail">Email</label>
+                <input type="text" id="mail" name="mail" required>
+
+                <label for="msg">Comentario</label>
+                <textarea id="msg" name="msg" placeholder="Comenta lo que quieras aquí..." onkeyup="censor(event)"></textarea>
+
+                <input type="submit" value="ENVIAR"></input>
+        </div>
+
+    </div>
+
+    <div class="abre_comentarios" onclick="openSidebar()">
+        <img src="img/comment.png" alt="Comentarios">
+    </div>
+
+    {% endblock %}   
+
+    {% block socials %}
+
+    <div class="socials">
+
+        COMPARTE EN TUS REDES:
+        <a href="https://twitter.com/intent/tweet?text=Conoce a este cientifico en la web portada html&url=[url]&hashtags=[hashtag]" title="Twittea sobre esto">
+            <img class="compartir" src="img/logotw.png">
+        </a>
+    
+        <a href="https://www.facebook.com/sharer/sharer.php?u=cientifico.html" title="Comparte en Facebook">
+            <img class="compartir" src="img/logofb.png">
+        </a>
+    
+        <a href="cientifico_imprimir.php?id={{scientist['idScientist']}}" title="Accede a la versión de impresión de esta página">
+            <img class="compartir" src="img/logoimp.png">
+        </a>
+    </div>
+
+    {% endblock %}

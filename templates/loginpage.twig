@@ -1,0 +1,33 @@
+{% extends "main.twig" %}
+
+{% block maincontent %}
+
+
+{% if msg %}
+<div id="msg_adv">
+        {{ msg }}
+</div>
+{% endif %}
+
+<div id="login_div">
+    {% if act == "login" %}
+        <h1> Inicia sesión </h1>
+        {% elseif act == "signIn" %}
+        <h1> Regístrate </h1>
+    {% endif %}
+    <form action="login_req.php?act={{ act }}" method="POST">
+        USERNAME: <br>
+        <input type="text" id="username" name="username"><br>
+        {% if act == "signIn" %}
+        EMAIL: <br>
+        <input type="email" id="email" name="email"> <br>
+        {% endif %}
+        PASSWORD: <br>
+        <input type="password" id="pass" name="pass"> <br>
+        
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Enviar">
+    </form>
+</div>
+
+
+{% endblock %}

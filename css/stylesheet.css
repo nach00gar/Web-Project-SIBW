@@ -1,0 +1,324 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Arial", sans-serif;
+    color: black;
+}
+/* Definimos la fuente y el color, así como que en principio no vamos a definir margenes generales */
+
+main {
+    max-width: auto;
+    margin: auto;
+}
+/* Tomamos un margen centrado automáticamente en el padre */
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    color: black;
+}
+/* Eliminamos color azul morado y subrayado de los enlaces. Ponemos color negro, mas elegante. */
+
+header {
+    background-color: #2a944a;
+    text-align: center;
+    align-content: center;
+}
+/* Definimos propiedad general de centro para los elementos del header y escogemos color de fondo */
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 25vw;
+}
+
+/* Definimos el wrapper del grid layout, hacemos que coloque 3 elementos por fila en el espacio del grid, además por motivos de responsividad establecemos el ancho de columna en función del vw port */
+
+.item {
+	color: black;
+	border: 3px solid #2a944a;
+	border-radius: 10px;
+    padding-bottom: 2.5rem;
+    margin: 1vh;
+    outline: none;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+/* Definimos la forma, el borde y color de cada bloque para científicos, las propiedades del texto y márgenes.*/
+
+.item img {
+    width: auto vw;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1vh;
+}
+/* Especificamos propiedades de cada imagen de científico para que se adecue al bloque item y al tamaño de la ventana del navegador */
+
+
+footer {
+    width: 100%;
+    text-align: center;
+    border-top: #2a944a 1px solid;
+    background-color: #2a944a;
+    color: white;
+    display: inline-block;
+}
+
+/* Definimos el estilo del pie de página de forma similar a la cabecera y centramos el texto*/
+
+.logopng{
+    width: 8%;
+    height: 8%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+}
+
+/* Fijamos el tamaño del logo de la página y lo centramos en la cabecera */
+
+
+#maintitle{
+    text-align: center;
+    color: white;
+}
+
+
+#MainMenu {
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align: center;
+}
+
+
+
+.botonmenu {
+	color: white;
+	border: 3px solid white;
+	border-radius: 50px;
+    padding: 0.8rem 2rem;
+    margin: 20px;
+    outline: none;
+    display: inline-flex;
+    font-weight: bold;
+}
+
+/* Establecemos los bordes de los botones del menú del mismo estilo a los de los bordes de las fotos y los  */
+
+.botonmenu:hover {
+    color: white;
+    border-color: white;
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+
+/* Se activa cuando el usuario se desplaza sobre un elemento con el cursor */
+
+.barralateral {
+    margin: 2%;
+    background-color: white;
+    border: 3px solid #2a944a;
+    width: 25%;
+    min-height: 40vh;
+    min-width: 25vw;
+    text-align: center;
+    padding: 0;
+    float: right;
+}
+
+/* Fijo tamaño y posición de la barra lateral en función del viewing port, con un mínimo, en este caso además, pongo bordes rectos */
+
+.barralateral h3 {
+    margin: 0;
+    padding: 0;
+    background-color: #2a944a;
+    color: white;
+    text-align: center;
+    width: 100%;
+} 
+  
+/* A PARTIR DE AQUÍ SE REFIERE A CIENTIFICO.HTML */
+
+.scientist {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  
+/* Creo un grid para la página del científico que separe el texto de la imagen*/
+
+.article {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    margin-left: 1vh;
+  }
+  /* Coloco el texto principal con cierto margen*/
+
+.foto {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 18%;
+    grid-column: 3 / 4;
+    grid-row: 1;
+  }
+
+    /* Coloco la imagen a su derecha*/
+
+.foto img{
+    width: 33vw;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+
+  /* Fijo el tamaño de la imagen de forma proporcional a lo fijado en el grid mediante el vw*/
+  
+
+img.compartir{
+    width: 50px;
+    height: 50px;
+  }
+
+/* Tamaño fijo para los botones de compartir*/
+
+.socials {
+    align-content: center;
+    margin-bottom: 2vh;
+    margin-left: 5vw;
+    text-align: justify;
+    font-weight: bold;
+    font-size:large;
+}
+
+/* Especifico el formato de texto para el div de compartir*/
+
+
+/* A partir de aquí comienza la P2*/
+
+
+.abre_comentarios {
+    background-color: #2a944a;
+    outline: none;
+    font-weight: bold;
+    width: 8%;
+    float: right;
+}
+
+
+.abre_comentarios img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.cerrar_comentarios {
+    color: black;
+    filter: invert(100%);
+}
+
+
+.sidebar {
+    color: white;
+    width: 0;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #2a944a;
+    overflow-x: hidden; 
+    padding-top: 20px;
+    /* Añade una línea blanca en el margen izquierdo */
+    border-left: 1px solid #ffffff;
+    transition: 0.5s;
+}
+
+
+/* Estilos para el título de los comentarios */
+#comentarios_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+  
+/* Estilos para los comentarios */
+.comments-section {
+    margin-bottom: 10px;
+  }
+  
+.comentario {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+.comentario h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+.comentario .texto {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+.comentario .fecha {
+    font-size: 0.8rem;
+    color: #white;
+  }
+  
+/* Estilos para el formulario de comentarios */
+.formulario {
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 50px;
+  }
+  
+.formulario label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+.formulario input[type="text"],
+.formulario textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+.formulario input[type="submit"] {
+    background-color: #00cc00;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+  
+/* Estilos para el botón de cerrar */
+.cerrar_comentarios {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #666666;
+  }

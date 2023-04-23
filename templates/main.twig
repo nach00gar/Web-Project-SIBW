@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+{# Plantilla base de la que heredan las demás. Contiene los elementos comunes. #}
+<head>
+    <meta charset="UTF-8">
+    <title>Científicos relevantes</title>
+    {% block style %}
+    <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+    <script src="js/comments.js" type="text/javascript"></script>
+    {% endblock %}
+</head>
+
+<body>
+    <main>
+        <header>
+            <div id=identidad>
+                {% block identidad %}
+                    {% if usuario['username'] %}
+                    Saludos {{usuario['username']}}!, accede al panel de <a href="configuracion.php">configuracion</a> o <a href="signout.php">cierra sesión</a>
+                    {% else %}
+                    <a href="login.php?act=signIn">Date de alta</a> o <a href="login.php?act=login">inicia sesión!</a>
+                    {% endif %}
+                {% endblock %}
+            </div>        
+
+            <div>
+                <a href="portada.php"> 
+                    <img src="img/logo.png" alt="Logo Portada" id="logopng">
+                </a>
+            </div>
+
+            <div>
+                <h3 id="maintitle">CIENCIA AYER Y HOY</h3>
+                <nav id="MainMenu">
+                    <a href="portada.php"><li class="botonmenu">HOME</li></a>
+                    <a href="cientifico.php?id=1"><li class="botonmenu">CIENTÍFICO DE LA SEMANA</li></a>
+                    {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
+                    <a href="gestioncientificos.php"><li class="boton">AGREGAR CIENTÍFICO</li></a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        {% block lateral %}
+        <div id="lateral">
+            <aside class="barralateral">
+                
+                    <h3>ENLACES</h3>
+                    <a href="https://lamaquinaoraculo.com/computacion/la-maquina-de-turing/">
+                        Máquina de Turing
+                    </a>
+                    <br><br>
+                    <a href="https://www.nationalgeographic.com.es/ciencia/polonio-y-radio-dos-elementos-radiactivos-mortales-y-muy-utiles_16174">
+                        Polonio y Radio
+                    </a>
+                    <br><br>
+                    <a href="https://es.wikipedia.org/wiki/Problema_de_Monty_Hall">
+                        Paradoja de Monty Hall
+                    </a>
+                    <br><br>
+                    <a href="https://elpais.com/elpais/2018/04/30/ciencia/1525069233_387473.html">
+                        Gauss
+                    </a>
+                
+            </aside>
+        </div>
+        {% endblock %}
+
+        {% block maincontent %}
+
+        {% endblock %}
+
+        {% block gallery %}
+
+        {% endblock %}
+
+    </main>
+
+    {% block comentarios %}
+
+    {% endblock %}
+
+    {% block socials %}
+
+    {% endblock %}
+
+
+    <footer>
+        <p>
+            Copyright CAYH &copy; 2023 Ignacio Garach Vélez
+        </p>
+    </footer>
+
+</body>
+</html>

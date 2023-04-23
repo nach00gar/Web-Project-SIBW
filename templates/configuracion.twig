@@ -1,0 +1,109 @@
+{% extends "main.twig" %}
+
+{% block lateral %}
+        <div id="lateral">
+            <aside class="barralateral">        
+                <h2>CONFIGURACIÓN</h2>
+                <a href="configuracion.php" class="configuraciones" {% if act=="misDatos" %} id="selected"  {% endif %}>
+                    MIS DATOS
+                </a>
+                {% if usuario['tipo'] == "SUPER" %}
+                <a href="configuracion.php?act=permisos" class="configuraciones" {% if act=="permisos" %} id="selected"  {% endif %}>
+                    PERMISOS
+                </a>
+                {% endif %}
+
+                {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "MODERADOR" %}
+                <a href="configuracion.php?act=comentarios" class="configuraciones" {% if act=="comentarios" %} id="selected"  {% endif %}>
+                    COMENTARIOS
+                </a>
+                {% endif %}
+
+                {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
+                <a href="configuracion.php?act=gestorcientificos" class="configuraciones" {% if act=="gestorcientificos" %} id="selected"  {% endif %}>
+                    EVENTOS
+                </a>
+                {% endif %}
+            </aside>
+        </div>
+{% endblock %}
+
+{% block maincontent %}
+
+
+{% if msg %}
+<div id="msg_adv">
+        {{ msg }}
+</div>
+{% endif %}
+
+{% if act=="misDatos" %}
+<div id="login_div">
+    <form action="cambiarmisdatos.php" method="POST">
+        USERNAME <br>
+        <input type="text" id="username" name="username" value="{{ usuario['username'] }}"><br>
+        EMAIL <br>
+        <input type="email" id="email" name="email" value="{{ usuario['email'] }}"> <br>
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Cambiar datos">
+    </form><br>
+
+    PERMISOS: {{ usuario['tipo'] }}
+</div>
+{% endif %}
+
+{% if act=="permisos" %}
+<div id="contenedor_configuracion">
+    {% for user in users %}
+    {% if user['username'] != usuario['username'] %}
+    <div class="item_contenedor_configuracion">
+        {{ user['username'] }}
+        <form action="cambiarPermisos.php?id={{ user['idUsuario'] }}" id="permisosform" method="POST">
+            <select id="cars" name="permiso">
+                <option value="USUARIO" {% if user['tipo'] == "USUARIO" %} selected {% endif %}>USUARIO</option>
+                <option value="MODERADOR" {% if user['tipo'] == "MODERADOR" %}selected{% endif %}>MODERADOR</option>
+                <option value="GESTOR" {% if user['tipo'] == "GESTOR" %}selected{% endif %}>GESTOR</option>
+                <option value="SUPER" {% if user['tipo'] == "SUPER" %}selected{% endif %}>SUPER</option>
+            </select>
+            <input type="submit" value="Cambiar permisos">
+        </form> 
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+{% endif %}
+
+{% if act=="comentarios" %}
+<select id="selector_cientifico_comentarios" name="permiso">
+        <option value="valor"> -- Selecciona un científico -- </option>
+    {% for s in scientists %}
+    <option value="{{ s['idScientist'] }}">{{ s['name'] }}</option>
+    {% endfor %}
+</select>
+
+<div id="contenedor_comentarios">
+    <!-- Aqui se cargan los comentarios del cientifico -->
+</div>
+    <script src="js/cargarComentarios.js"></script>
+{% endif %}
+
+
+{% if act=="gestorcientificos" %}
+<div id="contenedor_configuracion">
+    {% for s in scientists %}
+    <div class="item_contenedor_configuracion">
+        {{ s['name'] }}
+        <form action="gestorcientificos.php" id="permisosform" method="GET">
+            <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
+        </form> 
+        <form action="eliminarevento.php" id="permisosform" method="POST">
+            <button type="submit" name="id" value="{{ s['idScientist'] }}">Eliminar</button>
+        </form> 
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+{% endblock %}

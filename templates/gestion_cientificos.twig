@@ -1,0 +1,86 @@
+{% extends "main.twig" %}
+
+        {% block lateral %}
+        <div id="lateral">
+            <aside class="barralateral">        
+                <h2>CONFIGURACIÓN</h2>
+                <a href="configuracion.php" class="configuraciones" {% if act=="misDatos" %} id="selected"  {% endif %}>
+                    MIS DATOS
+                </a>
+                {% if usuario['tipo'] == "SUPER" %}
+                <a href="configuracion.php?act=permisos" class="configuraciones" {% if act=="permisos" %} id="selected"  {% endif %}>
+                    PERMISOS
+                </a>
+                {% endif %}
+
+                {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "MODERADOR" %}
+                <a href="configuracion.php?act=comentarios" class="configuraciones" {% if act=="comentarios" %} id="selected"  {% endif %}>
+                    COMENTARIOS
+                </a>
+                {% endif %}
+
+                {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
+                <a href="configuracion.php?act=gestorcientificos" class="configuraciones" {% if act=="gestorcientificos" %} id="selected"  {% endif %}>
+                    EVENTOS
+                </a>
+                {% endif %}
+            </aside>
+        </div>
+        {% endblock %}
+
+
+{% block contenido %}
+
+{% if msg %}
+<div id="msg_adv">
+        {{ msg }}
+</div>
+{% endif %}
+
+    <div class="gestor">
+        {% if scientist %}
+            <h2>{{ scientist['name'] }}</h2>
+        {% else %}
+            <h2>Nuevo evento</h2>
+        {% endif %}
+
+        <form action="editarcientifico.php?{% if scientist %}idScientist={{scientist['idScientist']}}{% endif %}" method="POST" enctype="multipart/form-data">
+
+            <input type="text" placeholder="Nombre cientifico" name="name" required {% if scientist %}value="{{ scientist['name'] }}"{% endif %}><br>
+
+            <br>Selecciona una foto de portada<br>
+            <input type="file" name="fileToUpload"  {% if not scientist is defined %}required{% endif %}><br><br>
+            <textarea name="fechasnm" placeholder="Fecha y lugar de nacimiento" required>{% if scientist %}{{scientist['fechasnm']}}{% endif %}</textarea>
+            <br><br>
+            <textarea name="content" placeholder="Contenido del artículo" required>{% if scientist %}{{scientist['content']}}{% endif %}</textarea>
+            <br><br>
+            <input type="text" id="hashtags_gestor" placeholder="Hashtags, separadas por comas [ht1, ht2, ht3...]" name="hashtags"
+            {% if hashtags %}value="{% for etiqueta in hashtags %}{{etiqueta['hashtag']}}, {% endfor %}"{% endif %}>
+            <br>
+            <input type="submit" id="boton_cientifico_gestor" value="Enviar">
+        </form>
+
+        {% for foto in fotos %}
+        <div class="foto_editar">
+            <a href="eliminarfoto.php?id={{ foto['idFoto'] }}&idScientist={{scientist['idScientist']}}"" class="eliminar_foto">&times;</a>
+            <img class="imagenes_editar_evento" src="{{ foto['direccion'] }}">
+        </div>
+        {% endfor %}
+
+        {% if scientist %}
+        <br><form action="subirfotos.php?{% if scientist %}id={{scientist['idScientist']}}{% endif %}" method="post" enctype="multipart/form-data">
+            <br>Selecciona las imagenes a subir <br>
+            <input type="file" name="files[]" multiple ><br>
+            <input type="submit" name="submit" value="Subir">
+        </form>
+        {% else %}
+            Añade la información del cientifico antes de subir las fotos
+        {% endif %}
+        
+
+    </div>
+
+
+
+
+{% endblock %}

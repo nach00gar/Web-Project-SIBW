@@ -1,0 +1,17 @@
+{% extends "main.twig" %}
+
+{# Plantilla hija que hereda de main. Define el contenido de la portada. #}
+
+    {% block maincontent %}
+
+    <div class="wrapper">
+
+                {% for scientist in assets %}
+                    <div class="item"><a href="cientifico.php?id={{ scientist['idScientist'] }}"><img src="{{ scientist['fotoPortada'] }}" class="width"> <div class="textin">{{ scientist['name'] }}</div></a></div>
+                {% endfor %}
+    
+    </div>
+
+    {% endblock %}
+
+

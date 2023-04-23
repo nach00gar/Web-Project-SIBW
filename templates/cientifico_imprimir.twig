@@ -1,0 +1,8 @@
+{% extends "cientifico.twig" %}
+
+{# Plantilla nieta que hereda de main y de cientifico. Únicamente redefine la hoja de estilos. #}
+
+    {% block style %}
+    <link rel="stylesheet" href="css/imprimir.css" type="text/css">
+    <script src="js/comments.js" type="text/javascript"></script>
+    {% endblock %}
