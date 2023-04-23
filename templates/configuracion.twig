@@ -21,7 +21,7 @@
 
                 {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
                 <a href="configuracion.php?act=gestorcientificos" class="configuraciones" {% if act=="gestorcientificos" %} id="selected"  {% endif %}>
-                    EVENTOS
+                    CIENTÍFICOS
                 </a>
                 {% endif %}
             </aside>
@@ -39,7 +39,7 @@
 
 {% if act=="misDatos" %}
 <div id="login_div">
-    <form action="cambiarmisdatos.php" method="POST">
+    <form action="changeuserdata.php" method="POST">
         USERNAME <br>
         <input type="text" id="username" name="username" value="{{ usuario['username'] }}"><br>
         EMAIL <br>
@@ -57,7 +57,7 @@
     {% if user['username'] != usuario['username'] %}
     <div class="item_contenedor_configuracion">
         {{ user['username'] }}
-        <form action="cambiarPermisos.php?id={{ user['idUsuario'] }}" id="permisosform" method="POST">
+        <form action="cambiarPermisos.php?id={{ user['idUsuario'] }}&act=permisos" id="permisosform" method="POST">
             <select id="cars" name="permiso">
                 <option value="USUARIO" {% if user['tipo'] == "USUARIO" %} selected {% endif %}>USUARIO</option>
                 <option value="MODERADOR" {% if user['tipo'] == "MODERADOR" %}selected{% endif %}>MODERADOR</option>
@@ -96,7 +96,7 @@
         <form action="gestorcientificos.php" id="permisosform" method="GET">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
         </form> 
-        <form action="eliminarevento.php" id="permisosform" method="POST">
+        <form action="eliminarcientifico.php" id="permisosform" method="POST">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Eliminar</button>
         </form> 
     </div>

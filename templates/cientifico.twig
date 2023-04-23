@@ -54,7 +54,7 @@
                         <p class="texto">
                             {{ c['content'] }}
                         </p>
-                        {% if usuario['tipo'] == "MOD" or usuario['tipo'] == "SUPER" %}
+                        {% if usuario['tipo'] == "MODERADOR" or usuario['tipo'] == "SUPER" %}
                             <form class="editar_comentario" id="editar_comentario{{ c['idComentario'] }}" action="editarcomentario.php?id={{ c['idComentario'] }}" method="POST">
                                 <label for="msg">Edición</label>
                                 <textarea id="msg_edit" name="msg_edit" placeholder="Edita el comentario..." required>{{ c['content'] }}</textarea>

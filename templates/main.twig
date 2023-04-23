@@ -16,7 +16,7 @@
             <div id=identidad>
                 {% block identidad %}
                     {% if usuario['username'] %}
-                    Saludos {{usuario['username']}}!, accede al panel de <a href="configuracion.php">configuracion</a> o <a href="signout.php">cierra sesión</a>
+                    Saludos {{usuario['username']}}!, accede al panel de <a href="configuracion.php">configuracion</a> o <a href="logout.php">cierra sesión</a>
                     {% else %}
                     <a href="login.php?act=signIn">Date de alta</a> o <a href="login.php?act=login">inicia sesión!</a>
                     {% endif %}

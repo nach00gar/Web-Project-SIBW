@@ -8,7 +8,7 @@
     return $mysqli;
   }
   //Consultamos los datos para la portada
-  function getAssets($mysqli) {
+  function getAssets() {
     $mysqli = conectar();
     $resultado = $mysqli->query("SELECT * FROM SCIENTIST");
 
@@ -61,7 +61,7 @@
     $fotos = array();
     
     while($res = $resultado->fetch_assoc()) {
-      $fotos[] = $res['direccion'];
+      $fotos[] = $res;
     }
     
     return $fotos;
@@ -89,9 +89,10 @@
       $id = -1;
     }
     $fecha = date("Y-m-d H:i:s");
+    $idUsuario = $user['idUsuario'];
 
     //Ejecutamos la peticion de inserción
-    $sql = "INSERT INTO COMENTARIO (content, fecha, idUsuario, idScientist) VALUES ('$user_msg', '$fecha', '$user', $id)";
+    $sql = "INSERT INTO COMENTARIO (content, fecha, idUsuario, idScientist) VALUES ('$user_msg', '$fecha', '$idUsuario', $id)";
     $mysqli->query($sql);
   }
   //Consulta de palabras censuradas
@@ -152,7 +153,7 @@
     
 
     //Ejecutamos la peticion de inserción
-    $sql = "UPDATE USUARIO SET username = '$newuser', email='$email' WHERE user = '$olduser'";
+    $sql = "UPDATE USUARIO SET username = '$newuser', email='$email' WHERE username = '$olduser'";
     $mysqli->query($sql);
   }
 

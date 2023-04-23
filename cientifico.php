@@ -5,6 +5,13 @@
 
   $loader = new \Twig\Loader\FilesystemLoader('templates');
   $twig = new \Twig\Environment($loader);
+
+  session_start();
+  $usuario = array();
+  if (isset($_SESSION['user'])) {
+      $usuario = getUsuario($_SESSION['user']);
+      
+  }
   
   $scientist = array('name' => "ERROR404", 'fechasnm' => 'ninguna',  'content' => "No encontrado", 'idScientist' => "-1");
   $foto = array('direccion' => 'img/1.jpg');
@@ -16,6 +23,8 @@
 
     $scientist = getScientist($id, $mysqli);
 
+    $hashtags = getTags($id);
+
     $fotos = getFotos($id, $mysqli);
 
     $comentarios = getComentarios($id, $mysqli);
@@ -23,5 +32,5 @@
     $id = -1;
   }
 
-  echo $twig->render('cientifico.twig', ['scientist' => $scientist, 'foto' => $foto, 'comentarios' => $comentarios, 'fotos' => $fotos]);
+  echo $twig->render('cientifico.twig', ['scientist' => $scientist, 'foto' => $foto, 'comentarios' => $comentarios, 'fotos' => $fotos, 'usuario' => $usuario, 'hashtags' => $hashtags]);
 ?>
