@@ -22,7 +22,7 @@
     
     $u = getUsuario($username);
 
-    if(empty($u) | $username === $old){
+    if($u === "NULL" | $username === $old){
         modifyUser($old, $username, $email);
         $msg = "Datos actualizados con éxito";
         $usuario['username'] = $username;

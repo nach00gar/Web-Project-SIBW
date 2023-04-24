@@ -21,7 +21,7 @@
 
                 {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
                 <a href="configuracion.php?act=gestorcientificos" class="configuraciones" {% if act=="gestorcientificos" %} id="selected"  {% endif %}>
-                    EVENTOS
+                    CIENTÍFICOS
                 </a>
                 {% endif %}
             </aside>
@@ -41,7 +41,7 @@
         {% if scientist %}
             <h2>{{ scientist['name'] }}</h2>
         {% else %}
-            <h2>Nuevo evento</h2>
+            <h2>Nuevo CIENTÍFICO</h2>
         {% endif %}
 
         <form action="editarcientifico.php?{% if scientist %}idScientist={{scientist['idScientist']}}{% endif %}" method="POST" enctype="multipart/form-data">
@@ -63,7 +63,7 @@
         {% for foto in fotos %}
         <div class="foto_editar">
             <a href="eliminarfoto.php?id={{ foto['idFoto'] }}&idScientist={{scientist['idScientist']}}"" class="eliminar_foto">&times;</a>
-            <img class="imagenes_editar_evento" src="{{ foto['direccion'] }}">
+            <img class="imagenes_editar_cientifico" src="{{ foto['direccion'] }}">
         </div>
         {% endfor %}
 

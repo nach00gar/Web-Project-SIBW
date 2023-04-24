@@ -271,7 +271,6 @@
     $allowTypes = array('jpg','png','jpeg');
     $imageFileType = strtolower(pathinfo($targetFilePath,PATHINFO_EXTENSION));
     if(in_array($imageFileType, $allowTypes)){
-    
       if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFilePath)){
 
       }
@@ -286,7 +285,7 @@
 
   function addScientist($etiquetas) {
     $mysqli = conectar();
-    $contenido  = mysqli_real_escape_string($mysqli, $_POST['content']);
+    $content  = mysqli_real_escape_string($mysqli, $_POST['content']);
     $nombre = mysqli_real_escape_string($mysqli, $_POST['name']);
     $fotoPortada = uploadPrincipalPhoto();
 

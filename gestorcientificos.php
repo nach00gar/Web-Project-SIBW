@@ -14,10 +14,9 @@
 
     if( $usuario['tipo'] == "SUPER" or $usuario['tipo'] == "GESTOR" ){ 
         $id = -1;
-        if (isset($_GET['id'])) { //Editar un evento
+        if (isset($_GET['id'])) { 
             $id = $_GET['id'];
             $mysqli = conectar();
-            //Evento
             $scientist = getScientist($id, $mysqli);
             //Fotos
             $fotos = getFotos($id, $mysqli);
@@ -28,8 +27,8 @@
 
             echo $twig->render('gestion_cientificos.twig', ['act' => $action, 'usuario' => $usuario, 'scientist' => $scientist, 'fotos' => $fotos, 'hashtags' => $etiquetas ]);
         }
-        else { //Crear un nuevo evento
-
+        else { //Crear un nuevo 
+            $action = "editar";
             echo $twig->render('gestion_cientificos.twig', ['act' => $action, 'usuario' => $usuario]);
         }
 

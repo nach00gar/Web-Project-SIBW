@@ -12,19 +12,21 @@
         
     }
     $action = "permisos";
+
     
     if( $usuario['tipo'] == "SUPER" ){ //RESTRINGIR esta opcion solo a usuarios SUPER
         $id = $_GET['id'];
         $tipo = $_POST['permiso'];
         grantPermission($id, $tipo);
         $msg = "Permisos actualizados satisfactoriamente!";
+        $users = getAllUsuarios();
     }
     else{
         $msg = "ERROR, no eres superusuario!";
     }
     
 
-    echo $twig->render('configuracion.twig', ['act' => $action, 'usuario' => $usuario, 'msg' => $msg ]);
+    echo $twig->render('configuracion.twig', ['act' => $action, 'usuario' => $usuario, 'msg' => $msg, 'users' => $users ]);
 
 
 ?>
