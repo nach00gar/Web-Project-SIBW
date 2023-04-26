@@ -15,7 +15,7 @@
         {% elseif act == "signIn" %}
         <h1> Regístrate </h1>
     {% endif %}
-    <form action="login_req.php?act={{ act }}" method="POST">
+    <form action="login_req.php?act={{ act }}" method="POST" class="formulario2">
         USERNAME: <br>
         <input type="text" id="username" name="username"><br>
         {% if act == "signIn" %}

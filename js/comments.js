@@ -90,29 +90,22 @@ function checkEmpty(form) {
 //Función que agrega el comentario despues de hacer todas las validaciones
   function addComment(event){
     event.preventDefault();
-    var name = document.getElementById('name');
-    var mail = document.getElementById('mail');
     var comment = document.getElementById('msg');
   
-    if (checkEmpty(name.value) || checkEmpty(mail.value) || checkEmpty(comment.value)){
+    if (checkEmpty(comment.value)){
       alert("Hay algun campo obligatorio vacio");
       return false
     }
     
-    if (!validateMail(mail)){
-      alert("Email no valido");
-      return false;
-    }
-  
-    var lista = document.getElementsByClassName('comments-section');
-    var fecha = (new Date()).toLocaleString('es-ES',{timeZone:'Europe/Madrid'});
-  
-//    lista[0].insertAdjacentHTML('beforeend', "\n" + "<div class=\"comentario\">\n" +
-//      "<h4>" + " " +name.value+":\n"+ "</h4>\n" +
-//      "<p class=\"texto\">\n" + " " + comment.value + "\n" + "</p>\n" +
-//      "<p class=\"fecha\">\n" + " "+ fecha + "\n"+ "</p>" +
-//      "</div>");
-  
    document.getElementById("fc1").submit();
     return true;
+  }
+
+  function confirmarDelete(){
+    return confirm("¿Desea eliminar este científico de la web?");
+  }
+
+  function openEditar(id){
+    var panel = document.getElementById("editar_comentario"+id).style.display = "inline";
+
   }

@@ -19,6 +19,12 @@
             $id = $_POST['id'];
             deleteScientist($id);
         }
+        else{
+            if (isset($_GET['id'])) { 
+                $id = $_GET['id'];
+                deleteScientist($id);
+            }
+        }
         
     }
     

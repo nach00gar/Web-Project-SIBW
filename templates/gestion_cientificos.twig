@@ -62,7 +62,7 @@
         <div class="wrapper">
         {% for foto in fotos %}
         <div class="item">
-            <a href="eliminarfoto.php?id={{ foto['idFoto'] }}&idScientist={{scientist['idScientist']}}"" class="eliminar_foto">&times;</a>
+            <a href="eliminarfoto.php?id={{ foto['idFoto'] }}&idScientist={{scientist['idScientist']}}"" class="eliminar_foto">Eliminar foto &times;</a>
             <img class="imagenes_editar_cientifico" src="{{ foto['direccion'] }}">
         </div>
         {% endfor %}

@@ -96,7 +96,7 @@
         <form action="gestorcientificos.php" id="permisosform" method="GET" class="formulario2">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
         </form> 
-        <form action="eliminarcientifico.php" id="permisosform" method="POST" class="formulario2">
+        <form action="eliminarcientifico.php" id="permisosform" method="POST" class="formulario2" onclick="return confirmarDelete()">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Eliminar</button>
         </form> 
     </div>

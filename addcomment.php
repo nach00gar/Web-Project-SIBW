@@ -14,7 +14,6 @@
   }
   
   $scientist = array('name' => "ERROR404", 'fechasnm' => 'ninguna',  'content' => "No encontrado", 'idScientist' => "-1");
-  $foto = array('direccion' => 'img/2.jpg');
   $comentarios = array();
 
   
@@ -35,5 +34,5 @@
     $id = -1;
   }
 
-  echo $twig->render('cientifico.twig', ['scientist' => $scientist, 'foto' => $foto, 'comentarios' => $comentarios, 'fotos' => $fotos, 'usuario' => $usuario]);
+  echo $twig->render('cientifico.twig', ['scientist' => $scientist, 'comentarios' => $comentarios, 'fotos' => $fotos, 'usuario' => $usuario]);
 ?>

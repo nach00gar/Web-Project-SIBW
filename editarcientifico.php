@@ -13,7 +13,7 @@
     }  
     
     
-    if( $usuario['tipo'] == "SUPER" or $usuario['tipo'] == "GESTOR" ){ //RESTRINGIR esta opcion solo a usuarios SUPER 
+    if( $usuario['tipo'] == "SUPER" or $usuario['tipo'] == "GESTOR" ){ 
         $id = -1;
         if(isset($_POST['hashtags'])){
             $hashtags = $_POST['hashtags'];

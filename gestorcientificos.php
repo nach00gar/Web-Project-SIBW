@@ -20,7 +20,6 @@
             $scientist = getScientist($id, $mysqli);
             //Fotos
             $fotos = getFotos($id, $mysqli);
-            var_dump($fotos);
             $action = "editar";
             //Etiquetas
             $etiquetas = getTags($id);

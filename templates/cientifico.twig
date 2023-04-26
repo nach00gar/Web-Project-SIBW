@@ -8,11 +8,22 @@
         <div class="article">
             <article>
                 <h2>{{ scientist['name'] }}</h2>
+                {% if usuario['tipo'] == "SUPER" or usuario['tipo'] == "GESTOR" %}
+                <a href="gestorcientificos.php?id={{ scientist['idScientist'] }}">
+                <img class="compartir" src="img/edit.jpg">
+                </a>
+
+                <a href="eliminarcientifico.php?id={{ scientist['idScientist'] }}" onclick="return confirmarDelete()">
+                <img class="compartir" src="img/delete.png">
+                </a>
+
+                                
+                {% endif %}
                 <h4>{{ scientist['fechasnm'] }}</h4>
                 {% for etiqueta in hashtags %}
-                    <a id="ht">{{etiqueta['hashtag']}}</a>
+                    <a class="ht">#{{etiqueta['hashtag']}}</a>
                 {% endfor %}
-                {{ scientist['content'] }}
+                <p> {{ scientist['content'] }} </p>
             </article>
         </div>
 
@@ -43,16 +54,20 @@
         <section class="comments-section">
             {% if comentarios %}
                 {% for c in comentarios %}
-                    <div class="comentario">
+                    <div class="comentario" id="c{{ c['idComentario'] }}">
                         <h4>
-                            {{ c['user'] }}:
+                            {{ c['username'] }}:
                         </h4>
                         {% if usuario['tipo'] == "MODERADOR" or usuario['tipo'] == "SUPER" %}
-                            <a class="btn_comentario" href="eliminarcomentario.php?id={{ c['idComentario'] }}&idScientist={{ scientist['idScientist'] }}">&times;</a>
-                            <a href="javascript:void(0)" class="btn_comentario" onclick="openEditar({{ c['idComentario'] }})">Editar</a>
+                            <a class="btn_comentario" href="eliminarcomentario.php?id={{ c['idComentario'] }}&idScientist={{ scientist['idScientist'] }}">Eliminar</a>
+                            <br>
+                            <a href="javascript:void(0)" class="btn_comentario_editar" onclick="openEditar({{ c['idComentario'] }})">Editar</a>
                         {% endif %}
                         <p class="texto">
                             {{ c['content'] }}
+                        </p>
+                        <p class="fecha">
+                            {{ c['fecha'] }}
                         </p>
                         {% if usuario['tipo'] == "MODERADOR" or usuario['tipo'] == "SUPER" %}
                             <form class="editar_comentario" id="editar_comentario{{ c['idComentario'] }}" action="editarcomentario.php?id={{ c['idComentario'] }}&idScientist={{ scientist['idScientist'] }}" method="POST">
@@ -67,9 +82,6 @@
                             </p>
                         {% endif %}
                         
-                        <p class="fecha">
-                            {{ c['fecha'] }}
-                        </p>
                     </div>
                 {% endfor %}
             {% else %}
@@ -85,19 +97,18 @@
 
         </section>    
 
+        {% if usuario %}
         <form class="formulario" id="fc1" name="fc1" action="/addcomment.php?" onsubmit="return addComment(event);">
-                <label for="name">Nombre</label>
-                <input type="text" id="name" name="name" required>
-
                 <input type='hidden' name='id' value="{{ scientist['idScientist'] }}" />
-
-                <label for="mail">Email</label>
-                <input type="text" id="mail" name="mail" required>
 
                 <label for="msg">Comentario</label>
                 <textarea id="msg" name="msg" placeholder="Comenta lo que quieras aquí..." onkeyup="censor(event)"></textarea>
 
                 <input type="submit" value="ENVIAR"></input>
+        </form>
+        {% else %}
+        Para poder comentar, debes estar registrado y logueado.
+        {% endif %}
         </div>
 
     </div>
@@ -124,6 +135,8 @@
         <a href="cientifico_imprimir.php?id={{scientist['idScientist']}}" title="Accede a la versión de impresión de esta página">
             <img class="compartir" src="img/logoimp.png">
         </a>
+
+
     </div>
 
     {% endblock %}

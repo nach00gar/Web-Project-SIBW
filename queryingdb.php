@@ -69,7 +69,7 @@
 
   //Consulta de comentarios de cada científico
   function getComentarios($id, $mysqli) {
-    $stmt = $mysqli->prepare("SELECT * FROM COMENTARIO WHERE idScientist=? ORDER BY fecha");
+    $stmt = $mysqli->prepare("SELECT * FROM COMENTARIO NATURAL JOIN USUARIO WHERE idScientist=? ORDER BY fecha");
     $stmt->bind_param("i", $id);
     $stmt->execute();
 
@@ -207,7 +207,7 @@
           //Moverlo a la carpeta
           //print "SI, " . $targetFilePath . "\n";
           if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
-            echo "SI, " . $targetFilePath . "\n";
+            #echo "SI, " . $targetFilePath . "\n";
             $sql = "INSERT INTO FOTO (direccion, idScientist) VALUES ('$targetFilePath', '$id')";
             $mysqli->query($sql);
           }
