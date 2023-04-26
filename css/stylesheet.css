@@ -322,3 +322,47 @@ img.compartir{
     text-decoration: none;
     color: #666666;
   }
+
+/* Estilos para el formulario de comentarios */
+.formulario2 {
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+}
+
+.formulario2 label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formulario2 input[type="text"], .formulario2 input,
+.formulario2 textarea {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.formulario2 input[type="submit"], .formulario2 button[type="submit"] {
+  background-color: #00cc00;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+#login_div {
+  padding-left: 15px;
+}
+
+.item_contenedor_configuracion{
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-right: 50px;
+  display: inline-block;
+}

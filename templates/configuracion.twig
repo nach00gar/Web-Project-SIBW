@@ -39,7 +39,7 @@
 
 {% if act=="misDatos" %}
 <div id="login_div">
-    <form action="changeuserdata.php" method="POST">
+    <form action="changeuserdata.php" method="POST" class="formulario2">
         USERNAME <br>
         <input type="text" id="username" name="username" value="{{ usuario['username'] }}"><br>
         EMAIL <br>
@@ -55,7 +55,7 @@
 <div id="contenedor_configuracion">
     {% for user in users %}
     {% if user['username'] != usuario['username'] %}
-    <div class="item_contenedor_configuracion">
+    <div class="formulario2">
         {{ user['username'] }}
         <form action="cambiarPermisos.php?id={{ user['idUsuario'] }}&act=permisos" id="permisosform" method="POST">
             <select id="cars" name="permiso">
@@ -93,10 +93,10 @@
     {% for s in scientists %}
     <div class="item_contenedor_configuracion">
         {{ s['name'] }}
-        <form action="gestorcientificos.php" id="permisosform" method="GET">
+        <form action="gestorcientificos.php" id="permisosform" method="GET" class="formulario2">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
         </form> 
-        <form action="eliminarcientifico.php" id="permisosform" method="POST">
+        <form action="eliminarcientifico.php" id="permisosform" method="POST" class="formulario2">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Eliminar</button>
         </form> 
     </div>
