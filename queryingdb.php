@@ -229,18 +229,19 @@
   function editScientist($id, $hashtags) {
     $mysqli = conectar();
     $content  = mysqli_real_escape_string($mysqli, $_POST['content']);
+    $fechasnm = mysqli_real_escape_string($mysqli, $_POST['fechasnm']);
     $nombre = mysqli_real_escape_string($mysqli, $_POST['name']);
     if( !is_numeric($id)){
       $id = -1;
     }
     
-    $sql = "UPDATE SCIENTIST SET content='$content', name='$nombre' WHERE idScientist='$id'";
+    $sql = "UPDATE SCIENTIST SET content='$content', name='$nombre', fechas='$fechasnm' WHERE idScientist='$id'";
     $mysqli->query($sql);
 
     //Añadir las etiquetas
     $sql = "DELETE FROM HASHTAG WHERE idScientist='$id'";
     $mysqli->query($sql);
-    foreach ($etiquetas as &$etiqueta){
+    foreach ($hashtags as &$etiqueta){
       $sql = "INSERT INTO HASHTAG (hashtag, idScientist) VALUES ('$etiqueta', '$id')";
       $mysqli->query($sql);
     }
@@ -287,10 +288,11 @@
     $mysqli = conectar();
     $content  = mysqli_real_escape_string($mysqli, $_POST['content']);
     $nombre = mysqli_real_escape_string($mysqli, $_POST['name']);
+    $fechasnm = mysqli_real_escape_string($mysqli, $_POST['fechasnm']);
     $fotoPortada = uploadPrincipalPhoto();
 
 
-    $sql= "INSERT INTO SCIENTIST (name, content, fotoPortada) VALUES ('$nombre', '$content', '$fotoPortada')";
+    $sql= "INSERT INTO SCIENTIST (name, fechas, content, fotoPortada) VALUES ('$nombre', '$fechasnm', '$content', '$fotoPortada')";
     $mysqli->query($sql);
 
     $sql= "SELECT MAX(idScientist) AS idScientist FROM SCIENTIST";

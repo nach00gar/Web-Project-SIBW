@@ -44,7 +44,7 @@
             <h2>Nuevo CIENTÍFICO</h2>
         {% endif %}
 
-        <form action="editarcientifico.php?{% if scientist %}idScientist={{scientist['idScientist']}}{% endif %}" method="POST" enctype="multipart/form-data" class="formulario2">
+        <form action="editarcientifico.php?{% if scientist %}id={{scientist['idScientist']}}{% endif %}" method="POST" enctype="multipart/form-data" class="formulario2">
 
             <input type="text" placeholder="Nombre cientifico" name="name" required {% if scientist %}value="{{ scientist['name'] }}"{% endif %}><br>
 
