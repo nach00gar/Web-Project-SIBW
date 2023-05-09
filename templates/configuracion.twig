@@ -47,6 +47,16 @@
         <input type="submit" class = "boton_dark" id="submit-btn" value="Cambiar datos">
     </form><br>
 
+    <form action="changepassword.php" method="POST" class="formulario2">
+        CONTRASEÑA ACTUAL <br>
+        <input type="text" id="old" name="old" value=""><br>
+        NUEVA CONTRASEÑA <br>
+        <input type="text" id="new1" name="new1" value=""><br>
+        REPETIR CONTRASEÑA <br>
+        <input type="text" id="new2" name="new2" value=""><br>
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Cambiar Contraseña">
+    </form><br>
+
     PERMISOS: {{ usuario['tipo'] }}
 </div>
 {% endif %}
@@ -74,17 +84,29 @@
 {% endif %}
 
 {% if act=="comentarios" %}
-<select id="selector_cientifico_comentarios" name="permiso">
-        <option value="valor"> -- Selecciona un científico -- </option>
-    {% for s in scientists %}
-    <option value="{{ s['idScientist'] }}">{{ s['name'] }}</option>
-    {% endfor %}
-</select>
+<table class="contenedor_comentarios">
 
-<div id="contenedor_comentarios">
-    <!-- Aqui se cargan los comentarios del cientifico -->
-</div>
-    <script src="js/cargarComentarios.js"></script>
+        <tr>
+
+            <th>Usuario</th>
+
+            <th>Comentario</th>
+
+            <th>Fecha</th>
+
+        </tr>
+    {% for c in comentarios %}    
+        <tr>
+
+            <td>{{c['username']}}</td>
+
+            <td>{{c['content']}}</td>
+
+            <td>{{c['fecha']}}</td>
+
+        </tr>
+    {% endfor %}
+</table>
 {% endif %}
 
 

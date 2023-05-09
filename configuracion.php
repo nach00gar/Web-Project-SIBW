@@ -25,7 +25,8 @@
 
         case "comentarios":
             $scientists = getAssets();
-            echo $twig->render('configuracion.twig', ['act' => $action, 'usuario' => $usuario, 'scientists' => $scientists]);
+            $comentarios = getAllComentarios();
+            echo $twig->render('configuracion.twig', ['act' => $action, 'usuario' => $usuario, 'scientists' => $scientists, 'comentarios' => $comentarios]);
             break;
 
         case "gestorcientificos":

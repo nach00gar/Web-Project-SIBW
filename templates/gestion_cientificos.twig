@@ -67,7 +67,6 @@
         </div>
         {% endfor %}
         </div>
-
         {% if scientist %}
         <br><form action="subirfotos.php?{% if scientist %}id={{scientist['idScientist']}}{% endif %}" method="post" enctype="multipart/form-data" class="formulario2">
             <br>Selecciona las imagenes a subir <br>
@@ -78,10 +77,5 @@
             Añade la información del cientifico antes de subir las fotos
         {% endif %}
         
-
     </div>
-
-
-
-
 {% endblock %}

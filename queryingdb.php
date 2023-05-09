@@ -82,6 +82,21 @@
     return $comentarios;
   }
 
+  function getAllComentarios() {
+    $mysqli = conectar();
+    $stmt = $mysqli->prepare("SELECT * FROM COMENTARIO NATURAL JOIN USUARIO ORDER BY idScientist, fecha");
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+    $comentarios = array();
+
+    while($res = $resultado->fetch_assoc()) {
+      $comentarios[] = $res;
+    }
+    var_dump($comentarios);
+    return $comentarios;
+  }
+
   //Agregar cmentario a la BBDD
   function addComment($id, $comentario, $mysqli, $user) {
     $user_msg  = mysqli_real_escape_string($mysqli, $comentario);
@@ -143,6 +158,17 @@
     $sql = "INSERT INTO USUARIO (username, pass, email, tipo) VALUES ('$username', '$pass', '$mail', 'USER')";
     $mysqli->query($sql);
   }
+
+  function changePass($user, $pass){
+    $mysqli = conectar();
+    //Ponemos las variables del usuario de forma segura
+    $user = mysqli_real_escape_string($mysqli, $user);
+    $hash = password_hash($pass, PASSWORD_DEFAULT);
+    //Ejecutamos la peticion de inserción
+    $sql = "UPDATE USUARIO SET pass = '$hash' WHERE username = '$user'";
+    $mysqli->query($sql);
+  }
+
 
   function modifyUser($olduser, $newuser, $email) {
     $mysqli = conectar();
