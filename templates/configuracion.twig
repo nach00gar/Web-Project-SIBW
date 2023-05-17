@@ -94,6 +94,11 @@
 
             <th>Fecha</th>
 
+            <th>Científico</th>
+
+            <th>Eliminar</th>
+
+            
         </tr>
     {% for c in comentarios %}    
         <tr>
@@ -104,25 +109,86 @@
 
             <td>{{c['fecha']}}</td>
 
+            <td>{{c['name']}}</td>
+
+            <td><a class="btn_comentario" href="eliminarcomentario.php?id={{c['idComentario']}}">Eliminar</a></td>
+
         </tr>
     {% endfor %}
 </table>
+<form action="buscarcomentario.php" method="POST" class="formulario2">
+        Buscar por contenido: <br>
+        <input type="text" id="nombre" name="nombre" ><br>
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Buscar">
+    </form>
 {% endif %}
 
 
 {% if act=="gestorcientificos" %}
 <div id="contenedor_configuracion">
+    <table class="contenedor_scientists">
+
+        <tr>
+
+            <th>Científico</th>
+
+            <th>Fecha y lugar de nacimiento</th>
+
+            <th>Biografía</th>
+
+            <th>Editar</th>
+
+            <th>Eliminar</th>
+
+            
+        </tr>
+
     {% for s in scientists %}
-    <div class="item_contenedor_configuracion">
-        {{ s['name'] }}
-        <form action="gestorcientificos.php" id="permisosform" method="GET" class="formulario2">
-            <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
-        </form> 
-        <form action="eliminarcientifico.php" id="permisosform" method="POST" class="formulario2" onclick="return confirmarDelete()">
+    <div class="item_contenedor_scientists">
+        <tr>
+
+            <td>{{ s['name'] }}</td>
+
+            <td>{{ s['fechas'] }}</td>
+
+            <td>{{ s['content'] }}</td>
+
+            <td>
+            <form action="gestorcientificos.php" id="permisosform" method="GET" class="formulario2">
+                <button type="submit" name="id" value="{{ s['idScientist'] }}">Editar</button>
+            </form>
+            </td>
+
+            <td>
+            <form action="eliminarcientifico.php" id="permisosform" method="POST" class="formulario2" onclick="return confirmarDelete()">
             <button type="submit" name="id" value="{{ s['idScientist'] }}">Eliminar</button>
-        </form> 
+            </form> 
+            </td>
+
+            
+        </tr>
+ 
+
     </div>
     {% endfor %}
+    <tr>
+    <th>
+    <form action="buscarscientist.php" method="POST" class="formulario2">
+        Buscar por nombre o apellidos: <br>
+        <input type="text" id="nombre" name="nombre" ><br>
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Buscar">
+    </form>
+    </th>
+    <th></th>
+    <th>
+    <form action="buscarscientist.php" method="POST" class="formulario2">
+        Buscar por biografía: <br>
+        <input type="text" id="bio" name="bio"><br>
+        <input type="submit" class = "boton_dark" id="submit-btn" value="Buscar">
+    </form>
+    </th>
+    </tr>
+</table>
 </div>
 {% endif %}
 

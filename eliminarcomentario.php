@@ -21,8 +21,11 @@
         deleteComment($id);
     }
     
-
-    header("Location: cientifico.php?id=".$idScientist);
-
+    if($idScientist === -1){
+        header("Location: configuracion.php?act=comentarios");
+    }
+    else{
+        header("Location: cientifico.php?id=".$idScientist);
+    }
 
 ?>

@@ -20,6 +20,49 @@
     return $scientists;
   }
 
+  function queryByName($name){
+    $mysqli = conectar();
+    //$name = mysqli_real_escape_string($mysqli, $name);
+    //var_dump($name);
+    //$stmt = $mysqli->prepare("SELECT * FROM SCIENTIST WHERE 'name'=?");
+    //$stmt->bind_param("s", $name);
+    //$stmt->execute();
+    $resultado = $mysqli->query("SELECT * FROM SCIENTIST WHERE name='$name' OR name LIKE '%$name%'");
+
+    $scientists = array();
+    while($res = $resultado->fetch_assoc()) {
+      $scientists[] = $res;
+    }
+    return $scientists;
+  }
+
+  function queryByBio($bio){
+    $mysqli = conectar();
+    //$name = mysqli_real_escape_string($mysqli, $name);
+    //var_dump($name);
+    //$stmt = $mysqli->prepare("SELECT * FROM SCIENTIST WHERE 'name'=?");
+    //$stmt->bind_param("s", $name);
+    //$stmt->execute();
+    $resultado = $mysqli->query("SELECT * FROM SCIENTIST WHERE content LIKE '%$bio%'");
+
+    $scientists = array();
+    while($res = $resultado->fetch_assoc()) {
+      $scientists[] = $res;
+    }
+    return $scientists;
+  }
+
+  function queryComments($nombre){
+    $mysqli = conectar();
+    $resultado = $mysqli->query("SELECT * FROM COMENTARIO NATURAL JOIN USUARIO WHERE content LIKE '%$nombre%'");
+
+    $scientists = array();
+    while($res = $resultado->fetch_assoc()) {
+      $scientists[] = $res;
+    }
+    return $scientists;
+  }
+
   function getAllUsuarios() {
     $mysqli = conectar();
     $resultado = $mysqli->query("SELECT * FROM USUARIO");
@@ -84,10 +127,7 @@
 
   function getAllComentarios() {
     $mysqli = conectar();
-    $stmt = $mysqli->prepare("SELECT * FROM COMENTARIO NATURAL JOIN USUARIO ORDER BY idScientist, fecha");
-    $stmt->execute();
-
-    $resultado = $stmt->get_result();
+    $resultado = $mysqli->query("SELECT username, COMENTARIO.content, fecha, SCIENTIST.name, idComentario FROM COMENTARIO NATURAL JOIN USUARIO JOIN SCIENTIST ON COMENTARIO.idScientist = SCIENTIST.idScientist ORDER BY COMENTARIO.idScientist, fecha", MYSQLI_USE_RESULT);
     $comentarios = array();
 
     while($res = $resultado->fetch_assoc()) {
